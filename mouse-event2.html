@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mouse-events2</title>
+    <style>
+        body{
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .move{
+            width: 10vw;
+            height: 10vw;
+            background-color: cadetblue;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="move"></div>
+
+    <script>
+
+        let moveEl = document.querySelector('.move');
+        document.body.addEventListener('keydown', moveBlock);
+        document.body.addEventListener('keyup', moveBlock);
+
+        let coordX = 0;
+        let coordY = 0;
+
+        function moveBlock() {
+
+            let wWin = document.documentElement.clientWidth;
+            let hWin = document.documentElement.clientHeight;
+
+            console.log(event.code)
+            switch (event.code) {
+                case 'ArrowRight':
+                    if(coordX + 10 + 200 <= wWin) {
+                    coordX += 10;
+                    }
+                    break;
+                case 'ArrowLeft':
+                    if(coordX - 10 >= 0){
+                        coordX -= 10;
+                    }
+                    break;
+                case 'ArrowUp':
+                    if(coordY - 10 >= 0){
+                        coordY -= 10;
+                    }
+                    break;
+                case 'ArrowDown':
+                    if(coordY + 10 + 200 <= hWin) {
+                    coordY += 10;
+                    }
+                    break;
+            }
+            moveEl.style.left = `${coordX}px`;
+            moveEl.style.top = `${coordY}px`;
+            
+        }
+
+    </script>
+
+</body>
+</html>

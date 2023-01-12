@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mouse-events</title>
+    <style>
+        .element_container{
+            height: 20vw;
+            width: 50vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 auto;
+            padding: 1vh;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+        .element_container div{
+            height: 10vw;
+            width: 10vw;
+            background-color: burlywood;
+            color: white;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        .info_container{
+            width: 50vw;
+            margin: 0 auto;
+        }
+        p{
+            font-size: 30px;
+        }
+        span{
+            color: burlywood;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="element_container">
+        <div id="el1"></div>
+        <div id="el2"></div>
+        <div id="el3"></div>
+    </div>
+
+    <div class="info_container">
+        <p>Имя события: <span id="name"></span></p>
+        <p>Куда пришел: <span id="targetElement"></span></p>
+        <p>Откуда пришел: <span id="relatedTargetElement"></span></p>
+
+    </div>
+    
+    <script>
+        let els = document.querySelectorAll(".element_container div");
+        let nameP = document.querySelector('#name');
+        for(let item of els) {
+            item.addEventListener('mouseover', showText);
+            item.addEventListener('mouseout', showText);
+        }
+
+        function showText(){
+            nameP.innerText = event.type;
+            document.getElementById('targetElement').innerText = event.target.id;
+
+            if(event.relatedTarget.classList.contains('element_container')){
+                document.getElementById('relatedTargetElement').innerText = event.relatedTarget.className;
+            } else {
+                document.getElementById('relatedTargetElement').innerText = event.relatedTarget.id;
+            }
+        }
+
+    </script>
+
+</body>
+</html>
